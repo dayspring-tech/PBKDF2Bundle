@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="security.authentication.provider.pbkdf2.class">Dayspring\PBKDF2Bundle\Security\Authentication\PBKDF2Provider</parameter>
+    </parameters>
+    
+    <services>
+        <service id="security.authentication.provider.pbkdf2" class="%security.authentication.provider.pbkdf2.class%" abstract="true" public="false">
+            <argument /> <!-- User Provider -->
+            <argument type="service" id="security.user_checker" />
+            <argument /> <!-- Provider-shared Key -->
+            <argument type="service" id="logger" />
+            <argument>%security.authentication.hide_user_not_found%</argument>
+            <argument type="service" id="password" />
+        </service>
+
+		<service id="validator.pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Validator\Constraints\WeakPasswordValidator">
+			<argument type="service" id="pbkdf2.weak_password" />
+			<tag name="validator.constraint_validator" alias="weak_password" />
+		</service>
+
+		<service id="pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Services\WeakPasswordService">
+		</service>
+	</services>
+    
+</container>

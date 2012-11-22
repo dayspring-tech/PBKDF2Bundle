@@ -1,0 +1,6 @@
+## YAML Template.
+services:
+    security.authentication.factory.pbkdf2:
+        class:  Dayspring\PBKDF2Bundle\DependencyInjection\Security\Factory\PBKDF2Factory
+        tags:
+            - { name: security.listener.factory }
