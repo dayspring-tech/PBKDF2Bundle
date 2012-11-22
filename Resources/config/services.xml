@@ -26,6 +26,14 @@
 		<service id="pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Services\WeakPasswordService">
 		</service>
 
+		<service id="password" class="Dayspring\PBKDF2Bundle\Services\PasswordService">
+			<argument>sha1</argument>
+			<argument>true</argument>
+			<argument type="service" id="logger" />
+			<argument>%dayspring_pbkdf2.md5_before_pbkdf2%</argument>
+			<tag name="monolog.logger" channel="eeba" />
+		</service>
+
 	</services>
     
 </container>

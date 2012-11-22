@@ -2,10 +2,11 @@
 
 namespace Dayspring\PBKDF2Bundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -24,5 +25,11 @@ class DayspringPBKDF2Extension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+		
+		$processor = new Processor();
+        $configuration = new Configuration($container->getParameter('kernel.debug'));
+        $config = $processor->processConfiguration($configuration, $configs);
+
+		$container->setParameter('dayspring_pbkdf2.md5_before_pbkdf2', $config['md5_before_pbkdf2']);
     }
 }
