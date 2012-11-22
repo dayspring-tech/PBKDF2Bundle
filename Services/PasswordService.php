@@ -16,6 +16,7 @@ class PasswordService {
      * Should old MD5-hashed passwords be accepted?
      */
     protected $allowOldPasswords;
+	protected $md5BeforePbkdf2 = false;
 
     /**
      * Iterations should be set to a range such that the hash calculation takes
@@ -38,11 +39,14 @@ class PasswordService {
      * @param array  $allowOldPasswords SHould old passwords be allowed.
      * @param LoggerInterface $logger Monolog logger to use for output.
      */
-    public function __construct($hashAlgorithm = 'sha1', $allowOldPasswords = true, LoggerInterface $logger = null)
+    public function __construct($hashAlgorithm = 'sha1', $allowOldPasswords = true, LoggerInterface $logger = null, $md5BeforePbkdf2 = false)
     {
         $this->logger = $logger;
         $this->_hashAlgo = $hashAlgorithm;
         $this->allowOldPasswords = $allowOldPasswords;
+		$this->md5BeforePbkdf2 = $md5BeforePbkdf2;
+		
+		//$this->container->getParameter('dayspring_pbkdf2.md5_before_pbkdf2');
     }
 
    /**
@@ -92,6 +96,9 @@ class PasswordService {
         if (null !== $this->logger) {
             $this->__time = microtime(true);
         }
+		if ($this->md5BeforePbkdf2){
+			$password = md5($password);
+		}
         $hash = bin2hex($this->pbkdf2($password, $salt, $iterations, $this->_hashLengthBytes, $this->_hashAlgo));
         if (null !== $this->logger) {
             $this->logger->notice(sprintf("hash took %f secs<br>\n", (microtime(true) - $this->__time)));

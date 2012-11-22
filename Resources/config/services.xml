@@ -25,6 +25,7 @@
 
 		<service id="pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Services\WeakPasswordService">
 		</service>
+
 	</services>
     
 </container>
