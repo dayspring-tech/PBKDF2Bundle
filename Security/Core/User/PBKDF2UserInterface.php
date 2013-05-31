@@ -13,6 +13,8 @@ interface PBKDF2UserInterface extends UserInterface {
     
     
     function getIterations();
+	
+	function setLastLogin($date);
 }
 
 ?>
