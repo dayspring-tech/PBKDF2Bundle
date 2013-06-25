@@ -134,6 +134,13 @@ abstract class DatabaseTestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
+    protected function callMethod($obj, $name, array $args) {
+        $class = new \ReflectionClass($obj);
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method->invokeArgs($obj, $args);
+    }
+
     /**
      * Shuts the kernel down if it was used in the test.
      */

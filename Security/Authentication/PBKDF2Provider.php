@@ -73,6 +73,8 @@ $logger->info("construct PBKDF2Provider, userProvider: ".get_class($userProvider
                 throw new BadCredentialsException('The presented password is invalid.');                
             }
         }
+		
+		$user->setLastLogin(new \DateTime());
     }
 
     /**
