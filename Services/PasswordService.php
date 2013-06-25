@@ -48,7 +48,11 @@ class PasswordService {
 		
 		//$this->container->getParameter('dayspring_pbkdf2.md5_before_pbkdf2');
     }
-
+	
+	public function setMd5BeforePbkdf2($md5BeforePbkdf2) {
+		$this->md5BeforePbkdf2 = $md5BeforePbkdf2;
+	}
+	
    /**
      * Generate a random salt, random iteration count, then hash the provided password.
      * The returned values must be saved to the user record.
