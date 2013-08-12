@@ -60,8 +60,8 @@ $logger->info("construct PBKDF2Provider, userProvider: ".get_class($userProvider
                 throw new BadCredentialsException('The presented password cannot be empty.');
             }
 
-            $this->logger->info(sprintf("checking user %s password: %s salt: %s hash: %s iter: %d\n",
-                $token->getUsername(), $presentedPassword, $user->getSalt(), $user->getPassword(), $user->getIterations()));
+//            $this->logger->info(sprintf("checking user %s password: %s salt: %s hash: %s iter: %d\n",
+//                $token->getUsername(), $presentedPassword, $user->getSalt(), $user->getPassword(), $user->getIterations()));
             
             $userPassword = $user->getPassword();
             if (empty($userPassword)) {
