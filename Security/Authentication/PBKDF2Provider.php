@@ -100,7 +100,7 @@ $logger->info("construct PBKDF2Provider, userProvider: ".get_class($userProvider
         } catch (UsernameNotFoundException $notFound) {
             throw $notFound;
         } catch (\Exception $repositoryProblem) {
-            throw new AuthenticationServiceException($repositoryProblem->getMessage(), $token, 0, $repositoryProblem);
+            throw new AuthenticationServiceException($repositoryProblem->getMessage(), 0, $repositoryProblem);
         }
     }
 }
