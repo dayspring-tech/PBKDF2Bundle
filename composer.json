@@ -4,7 +4,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "Dayspring\\PBKDF2Bundle\\": "",
+            "Dayspring\\PBKDF2Bundle\\": ""
         }
     }
 }
