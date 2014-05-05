@@ -1,5 +1,10 @@
 {
     "name": "dayspring-tech/PBKDF2Bundle",
     "require": {
+    },
+	"autoload": {
+        "psr-4": {
+            "Dayspring\\PBKDF2Bundle\\": "",
+        }
     }
 }
