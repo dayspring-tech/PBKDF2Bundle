@@ -23,7 +23,15 @@ class WeakPasswordValidator extends ConstraintValidator {
         }
 		return true;
     }
-	
+        
+    public function validate($value, Constraint $constraint)
+    {
+        if ($this->weakPasswordService->isWeakPassword($value)) {
+            $this->context->addViolation($constraint->message, array('%string%' => $value));
+        }
+    }
+
+
 }
 
 ?>
