@@ -4,3 +4,7 @@ services:
         class:  Dayspring\PBKDF2Bundle\DependencyInjection\Security\Factory\PBKDF2Factory
         tags:
             - { name: security.listener.factory }
+    security.authentication.factory.totp:
+        class:  Dayspring\PBKDF2Bundle\DependencyInjection\Security\Factory\TOTPFactory
+        tags:
+            - { name: security.listener.factory }

@@ -4,8 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <imports>
+		<import resource="security_listeners.xml"/>
+	</imports>
+    
     <parameters>
         <parameter key="security.authentication.provider.pbkdf2.class">Dayspring\PBKDF2Bundle\Security\Authentication\PBKDF2Provider</parameter>
+        <parameter key="security.authentication.provider.totp.class">Dayspring\PBKDF2Bundle\Security\Authentication\TOTPProvider</parameter>
     </parameters>
     
     <services>
@@ -18,12 +23,25 @@
             <argument type="service" id="password" />
         </service>
 
+        <service id="security.authentication.provider.totp" class="%security.authentication.provider.totp.class%" abstract="true" public="false">
+            <argument /> <!-- User Provider -->
+            <argument type="service" id="security.user_checker" />
+            <argument /> <!-- Provider-shared Key -->
+            <argument type="service" id="logger" />
+            <argument>%security.authentication.hide_user_not_found%</argument>
+            <argument type="service" id="password" />
+            <argument type="service" id="totp" />
+        </service>
+
 		<service id="validator.pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Validator\Constraints\WeakPasswordValidator">
 			<argument type="service" id="pbkdf2.weak_password" />
 			<tag name="validator.constraint_validator" alias="weak_password" />
 		</service>
 
 		<service id="pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Services\WeakPasswordService">
+		</service>
+
+		<service id="totp" class="Dayspring\PBKDF2Bundle\Services\TOTPService">
 		</service>
 
 		<service id="password" class="Dayspring\PBKDF2Bundle\Services\PasswordService">
@@ -33,7 +51,8 @@
 			<argument>%dayspring_pbkdf2.md5_before_pbkdf2%</argument>
 			<tag name="monolog.logger" channel="eeba" />
 		</service>
-
+		
+		
 	</services>
     
 </container>
