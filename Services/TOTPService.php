@@ -12,6 +12,11 @@ class TOTPService
 
 	public function checkToken($token, array $validSecrets)
 	{
+		if (count($validSecrets) == 0){
+			// user has no valid secrets defined, so skip checking of token
+			return true;
+		}
+		
 		foreach ($validSecrets as $secret) {
 			if ($this->verify_key($secret, $token)) {
 				return true;
