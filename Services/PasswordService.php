@@ -1,7 +1,7 @@
 <?php
 namespace Dayspring\PBKDF2Bundle\Services;
 
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /* 
  * PBKDF2-based Password hashing functions.
