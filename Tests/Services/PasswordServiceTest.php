@@ -2,9 +2,10 @@
 
 namespace Dayspring\PBKDF2Bundle\Tests\Services;
 
+use PHPUnit\Framework\TestCase;
 use Dayspring\PBKDF2Bundle\Services\PasswordService;
 
-class PasswordServiceTest extends \PHPUnit_Framework_TestCase {
+class PasswordServiceTest extends TestCase {
 
     public function testCreatePassword() {
 		$passwordService = $this->getPasswordService(false);
