@@ -145,7 +145,7 @@ abstract class DatabaseTestCase extends TestCase
     /**
      * Shuts the kernel down if it was used in the test.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
@@ -153,7 +153,7 @@ abstract class DatabaseTestCase extends TestCase
     /**
      * Shuts the kernel down if it was used in the test.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (null !== static::$kernel) {
             static::$kernel->shutdown();

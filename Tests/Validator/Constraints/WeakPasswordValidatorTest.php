@@ -15,7 +15,7 @@ class WeakPasswordValidatorTest extends DatabaseTestCase {
 	
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
 		parent::setUp();
 				
@@ -23,7 +23,7 @@ class WeakPasswordValidatorTest extends DatabaseTestCase {
         $this->validator = new WeakPasswordValidator($weakPasswordService);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->validator = null;
     }
