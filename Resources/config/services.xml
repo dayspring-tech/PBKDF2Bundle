@@ -9,7 +9,16 @@
     </parameters>
     
     <services>
-        <service id="security.authentication.provider.pbkdf2" class="%security.authentication.provider.pbkdf2.class%" abstract="true" public="false">
+		<prototype namespace="Dayspring\PBKDF2Bundle\Command\" resource="../../Command/*" autowire="true" autoconfigure="true" />
+		<prototype namespace="Dayspring\PBKDF2Bundle\Controller\" resource="../../Controller/*" autowire="true" autoconfigure="true" />
+		<prototype namespace="Dayspring\PBKDF2Bundle\Services\" resource="../../Services/*" autowire="true" autoconfigure="true" />
+
+		<service
+			id="security.authentication.provider.pbkdf2"
+			class="%security.authentication.provider.pbkdf2.class%"
+			abstract="true"
+			public="false"
+		>
             <argument /> <!-- User Provider -->
             <argument type="service" id="security.user_checker" />
             <argument /> <!-- Provider-shared Key -->
@@ -18,22 +27,34 @@
             <argument type="service" id="password" />
         </service>
 
-		<service id="validator.pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Validator\Constraints\WeakPasswordValidator">
+		<service
+			id="validator.pbkdf2.weak_password"
+			class="Dayspring\PBKDF2Bundle\Validator\Constraints\WeakPasswordValidator"
+		>
 			<argument type="service" id="pbkdf2.weak_password" />
 			<tag name="validator.constraint_validator" alias="weak_password" />
 		</service>
 
-		<service id="pbkdf2.weak_password" class="Dayspring\PBKDF2Bundle\Services\WeakPasswordService">
+		<service
+			id="pbkdf2.weak_password"
+			class="Dayspring\PBKDF2Bundle\Services\WeakPasswordService"
+			autowire="true"
+			autoconfigure="true"
+		>
 		</service>
 
-		<service id="password" class="Dayspring\PBKDF2Bundle\Services\PasswordService">
+		<service
+			id="password"
+			class="Dayspring\PBKDF2Bundle\Services\PasswordService"
+			autowire="true"
+			autoconfigure="true"
+		>
 			<argument>sha1</argument>
 			<argument>true</argument>
 			<argument type="service" id="logger" />
 			<argument>%dayspring_pbkdf2.md5_before_pbkdf2%</argument>
 			<tag name="monolog.logger" channel="eeba" />
 		</service>
-
 	</services>
     
 </container>
