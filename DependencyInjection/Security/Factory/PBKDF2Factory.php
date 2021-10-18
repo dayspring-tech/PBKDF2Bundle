@@ -75,7 +75,7 @@ class PBKDF2Factory extends AbstractFactory {
     {
         $entryPointId = 'security.authentication.form_entry_point.'.$id;
         $container
-            ->setDefinition($entryPointId, new DefinitionDecorator('security.authentication.form_entry_point'))
+            ->setDefinition($entryPointId, new ChildDefinition('security.authentication.form_entry_point'))
             ->addArgument(new Reference('security.http_utils'))
             ->addArgument($config['login_path'])
             ->addArgument($config['use_forward'])
