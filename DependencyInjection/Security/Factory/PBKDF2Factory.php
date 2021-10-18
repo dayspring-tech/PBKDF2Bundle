@@ -2,9 +2,9 @@
 namespace Dayspring\PBKDF2Bundle\DependencyInjection\Security\Factory;
 
 
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory;
@@ -50,7 +50,7 @@ class PBKDF2Factory extends AbstractFactory {
     {
         $provider = 'security.authentication.provider.pbkdf2.'.$id;
         $container
-            ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.pbkdf2'))
+            ->setDefinition($provider, new ChildDefinition('security.authentication.provider.pbkdf2'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(2, $id)
         ;
